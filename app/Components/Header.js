@@ -1,34 +1,60 @@
+'use client';
 import Link from 'next/link';
-import React from 'react'
-import { FaShopify } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
+import React, { useState } from 'react';
+import { FaShopify, FaBars, FaTimes } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi';
 
+const NavLinks = [
+    { id: 0, name: 'Home', path: '/' },
+    { id: 1, name: 'Product', path: '/Pages/Product' },
+    { id: 2, name: 'About', path: '#About' },
+];
 
-
-const NavLinks = [{ id: 0, name: "Home", path: "/" },
-{ id: 1, name: "Product", path: "/Pages/Product" },
-{ id: 2, name: "About", path: "#About" },];
 const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <div>
-            <header className="flex flex-row justify-between p-4 bg-slate-300">
-                <FaShopify className="font-bold text-3xl text-green-800" />
-                <nav className="flex flex-row gap-4">
+        <header className="flex justify-between items-center p-4  bg-slate-300 fixed w-full z-10 top-0">
+            {/* Logo */}
+            <FaShopify className="text-3xl text-green-800" />
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex gap-6">
+                {NavLinks.map((link) => (
+                    <Link key={link.id} href={link.path} className="hover:text-blue-600">
+                        {link.name}
+                    </Link>
+                ))}
+            </nav>
+
+            {/* Cart Icon */}
+            <Link href="/Pages/Cart" className="hidden md:block">
+                <FiShoppingCart className="text-3xl text-red-800" />
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <button className="md:hidden z-30" onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? null : <FaBars className="text-3xl" />}
+            </button>
+
+            {/* Mobile Menu Overlay */}
+            {menuOpen && (
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center gap-6 text-white text-xl z-20">
+                    <button className="absolute top-4 right-4 text-3xl" onClick={() => setMenuOpen(false)}>
+                        <FaTimes />
+                    </button>
                     {NavLinks.map((link) => (
-                        <li key={link.id} className="list-none">
-                            <Link href={link.path}>{link.name}</Link>
-                        </li>
+                        <Link key={link.id} href={link.path} onClick={() => setMenuOpen(false)}>
+                            {link.name}
+                        </Link>
                     ))}
-                </nav>
-                <button>
-                    <FiShoppingCart className="text-3xl font-bold text-red-800" />
+                    <Link href="/Pages/Cart" onClick={() => setMenuOpen(false)}>
+                        <FiShoppingCart className="text-3xl text-white" />
+                    </Link>
+                </div>
+            )}
+        </header>
+    );
+};
 
-                </button>
-
-            </header>
-
-        </div>
-    )
-}
-
-export default Header
+export default Header;

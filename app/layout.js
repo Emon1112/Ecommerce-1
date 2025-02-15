@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./Components/Header";
 import { ProductFetch } from "./Api/ProductFetch";
+import CartProvider from "./Reducer/CartProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,8 +25,10 @@ export default function RootLayout({ children }) {
       <body
         className="p-2">
         <ProductFetch>
-          <Header />
-          {children}
+          <CartProvider>
+            <Header />
+            {children}
+          </CartProvider>
         </ProductFetch>
       </body>
     </html>

@@ -1,3 +1,4 @@
-import { createContext } from "react/cjs/react.production";
+"use client"
+import { createContext } from "react";
 
 export const CartContext = createContext();

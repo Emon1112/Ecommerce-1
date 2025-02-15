@@ -1,9 +1,11 @@
 'use client'
 import { useContext, use } from 'react';
 import { ProductContext } from '@/app/Api/ProductContextprovider';
+import { CartContext } from '@/app/Api/CartContext';
 
 const PopularProduct = ({ params }) => {
     const { product } = useContext(ProductContext);
+    const { addToCart } = useContext(CartContext);
 
     // ✅ Unwrapping params correctly
     const { id } = use(params);  // Now params is resolved
@@ -23,7 +25,7 @@ const PopularProduct = ({ params }) => {
             <p className="text-xl font-semibold">${item.price}</p>
             <button
                 className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
-                onClick={() => addToCart(product)}
+                onClick={() => addToCart(item)}
             >
                 Add to Cart
             </button>
