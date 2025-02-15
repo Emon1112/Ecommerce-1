@@ -14,7 +14,7 @@ const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <header className="flex justify-between items-center p-4  bg-slate-300 fixed w-full z-10 top-0">
+        <header className="flex justify-between items-center p-4  bg-slate-300 fixed w-full top-0 bg-opacity-10">
             {/* Logo */}
             <FaShopify className="text-3xl text-green-800" />
 
