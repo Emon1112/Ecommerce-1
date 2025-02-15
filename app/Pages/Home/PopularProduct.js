@@ -1,5 +1,6 @@
 'use client'
 import { ProductContext } from '@/app/Api/ProductContextprovider';
+import Link from 'next/link';
 import React from 'react';
 import { useContext } from 'react';
 
@@ -19,6 +20,9 @@ const PopularProduct = () => {
                         <div className="mt-4">
                             <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
                             <p className="text-gray-600 mt-2 text-lg font-medium">${item.price}</p>
+                            <Link href={`/Pages/Product/${item.id}`}>
+                                Details
+                            </Link>
                         </div>
                     </div>
                 ))}
