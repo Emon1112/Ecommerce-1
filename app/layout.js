@@ -1,8 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
 import { ProductFetch } from "./Api/ProductFetch";
 import CartProvider from "./Reducer/CartProvider";
+import Footer from "./Components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
           <CartProvider>
             <Header />
             {children}
+            <Footer />
           </CartProvider>
         </ProductFetch>
       </body>

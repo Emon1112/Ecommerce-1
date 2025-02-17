@@ -1,47 +1,71 @@
 "use client";
 
 import { CartContext } from "@/app/Api/CartContext";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { FiTrash2 } from "react-icons/fi";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 export default function Cart() {
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart, getTotalPrice, clearCart } = useContext(CartContext);
+
     useEffect(() => {
         console.log("Cart contents:", cart);
     }, [cart]);
 
-
     return (
-        <div className="p-5">
-            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+        <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg min-h-screen mt-12">
+            <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">🛒 Your Shopping Cart</h1>
+
             {cart.length === 0 ? (
-                <p className="text-center text-gray-500">Your cart is empty.</p>
+                <p className="text-center text-gray-500 text-lg">Your cart is empty. Start adding items!</p>
             ) : (
-                <div>
+                <div className="space-y-4">
                     {cart.map((product) => (
-                        <div key={product.id} className="border p-4 rounded-md mb-2">
-                            <h2 className="text-lg font-semibold">{product.title}</h2>
-                            <p className="text-gray-700">${product.price}</p>
-                            <button
-                                onClick={() => removeFromCart(product.id)}
-                                className="mt-2 px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                            >
-                                Remove
-                            </button>
-                            <p>{product.title} - ${product.price} x {product.quantity}</p>
-                            <button onClick={() => increaseQuantity(product.id)}>+</button>
-                            <button onClick={() => decreaseQuantity(product.id)}>-</button>
-                            <button onClick={() => removeFromCart(product.id)}>Remove</button>
-                            <h2>Total Price: ${getTotalPrice()}</h2>
+                        <div key={product.id} className="flex items-center justify-between border p-4 rounded-lg shadow-sm">
+                            <div>
+                                <h2 className="text-lg font-semibold text-gray-800">{product.title}</h2>
+                                <p className="text-gray-600">${product.price.toFixed(2)} x {product.quantity}</p>
+                            </div>
 
+                            <div className="flex items-center space-x-3">
+                                <button
+                                    onClick={() => decreaseQuantity(product.id)}
+                                    className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition"
+                                    aria-label="Decrease quantity"
+                                >
+                                    <FaMinus className="text-gray-700" />
+                                </button>
 
+                                <span className="text-lg font-semibold">{product.quantity}</span>
+
+                                <button
+                                    onClick={() => increaseQuantity(product.id)}
+                                    className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition"
+                                    aria-label="Increase quantity"
+                                >
+                                    <FaPlus />
+                                </button>
+
+                                <button
+                                    onClick={() => removeFromCart(product.id)}
+                                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition"
+                                    aria-label="Remove item"
+                                >
+                                    <FiTrash2 />
+                                </button>
+                            </div>
                         </div>
                     ))}
+
+                    <div className="mt-6 text-right">
+                        <h2 className="text-xl font-bold text-gray-800">Total: ${getTotalPrice().toFixed(2)}</h2>
+                    </div>
+
                     <button
                         onClick={clearCart}
-                        className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900"
+                        className="w-full py-3 mt-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition"
                     >
-                        Clear Cart
+                        🧹 Clear Cart
                     </button>
                 </div>
             )}
