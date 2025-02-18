@@ -4,15 +4,14 @@ import { ProductContext } from '@/app/Api/ProductContextprovider';
 import Link from 'next/link';
 
 const Page = () => {
-    const { product } = useContext(ProductContext);
+    const { product, categories, link } = useContext(ProductContext);
     const [searchQuery, setSearchQuery] = useState('');
-    const { categories, link } = useContext(ProductContext);
-
 
     // Filter products based on search input
     const filteredProducts = product.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
     return (
         <div className="p-5 min-h-screen mt-10">
             {/* Search Bar */}
@@ -26,16 +25,19 @@ const Page = () => {
                 />
             </div>
             <div className="flex flex-wrap justify-center items-center gap-3 mb-6">
-                {categories.map((section, index) => (
+                {categories.map((category, index) => (
                     <button
                         key={index}
                         className="p-4 px-5 sm:p-2 sm:px-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition sm:text-sm"
-                        onClick={() => link(section)}
+                        onClick={() => link(category)} // Update products based on category
                     >
-                        {section}
+                        {category}
                     </button>
                 ))}
-                <button className="p-4 px-5 sm:p-2 sm:px-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition sm:text-sm">
+                <button
+                    className="p-4 px-5 sm:p-2 sm:px-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition sm:text-sm"
+                    onClick={() => link("")} // Show all products
+                >
                     All
                 </button>
             </div>
@@ -48,14 +50,12 @@ const Page = () => {
                             <div>
                                 <Link href={`/Pages/Product/${item.id}`} className="text-green-600 font-semibold hover:underline">
                                     <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-lg" />
-
                                 </Link>
-
                             </div>
                             <div className="mt-4">
-                                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                                <p className="text-gray-600 mt-2 text-lg font-medium">${item.price}</p>
-
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                    {item.title.split(" ").slice(0, 4).join(" ")}...
+                                </h3>                                <p className="text-gray-600 mt-2 text-lg font-medium">${item.price}</p>
                             </div>
                         </div>
                     ))
