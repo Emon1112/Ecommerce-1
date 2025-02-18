@@ -41,12 +41,15 @@ const cartReducer = (state, action) => {
     case "DECREASE_QUANTITY":
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload && item.quantity > 1
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        ),
+        cart: state.cart
+          .map(item =>
+            item.id === action.payload
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+          .filter(item => item.quantity > 0), // Remove item if quantity becomes 0
       };
+
 
     default:
       return state;
