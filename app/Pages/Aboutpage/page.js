@@ -8,7 +8,7 @@ const AboutUs = () => {
             <div className="md:w-1/2 text-left">
                 <h2 className="text-2xl font-bold text-green-700">About Us</h2>
                 <p className="mt-4 text-gray-600 text-3xl font-serif">
-                    MyShoping Group is a family of brands and businesses, making it possible for
+                    Dummy Group is a family of brands and businesses, making it possible for
                     customers around the world to express themselves through fashion and design,
                     and to choose a more sustainable lifestyle. We create value for people and
                     society in general by delivering our customer offering and by developing
