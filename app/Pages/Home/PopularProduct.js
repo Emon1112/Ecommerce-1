@@ -22,8 +22,6 @@ const PopularProduct = () => {
                     <div key={item.id} className="bg-white shadow-lg rounded-2xl p-4 border border-gray-200 hover:shadow-xl transition" >
                         <Link href={`/Pages/Product/${item.id}`}>
                             <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-lg" />
-
-
                         </Link>
                         <div className="mt-4">
                             <h3 className="text-lg font-semibold text-gray-800">
