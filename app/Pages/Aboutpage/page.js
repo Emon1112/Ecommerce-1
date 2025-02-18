@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import aboutimage from "@/public/teamwork-and-team-building.png";
+import aboutimage from "@/public/teamwork.png";
 
 const AboutUs = () => {
     return (
