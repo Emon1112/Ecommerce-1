@@ -47,7 +47,7 @@ const Header = () => {
                 {menuOpen ? <FaTimes className="text-3xl text-white" /> : <FaBars className="text-3xl" />}
             </button>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Overlay for */}
             {menuOpen && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center gap-6 text-white text-xl z-20">
                     {NavLinks.map((link) => (
