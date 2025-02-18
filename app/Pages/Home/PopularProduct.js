@@ -1,4 +1,5 @@
 'use client'
+import { Rating, Typography } from "@material-tailwind/react";
 import { CartContext } from '@/app/Api/CartContext';
 import { ProductContext } from '@/app/Api/ProductContextprovider';
 import Link from 'next/link';
@@ -25,11 +26,13 @@ const PopularProduct = () => {
 
                         </Link>
                         <div className="mt-4">
-                            <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                            <h3 className="text-lg font-semibold text-gray-800">
+                                {item.title.split(" ").slice(0, 4).join(" ")}...
+                            </h3>
                             <div>
                                 <p className="text-gray-600 mt-2 text-lg font-medium">${item.price}</p>
-                                <p className="text-yellow-500 mt-1">{item.rating.rate} stars</p> {/* Display rating rate */}
                             </div>
+
                         </div>
                     </div>
                 ))}
