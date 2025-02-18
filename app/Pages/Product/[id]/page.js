@@ -14,7 +14,7 @@ const PopularProduct = ({ params }) => {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-5">
+        <div className="min-h-screen flex flex-col items-center justify-center p-6">
             <div className="w-full max-w-4xl bg-white shadow-lg rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
                 {/* Product Image */}
